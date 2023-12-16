@@ -9,14 +9,16 @@ class UserDB {
   
   Future<void> createTable(Database databse)async { //  PRIMARY KEY("id" AUTOINCREMENT)
 
-    var sql = """CREATE TABLE IF NOT EXISTS $tableName(
-    "id" PRIMARY KEY("id" AUTOINCREMENT),
+    await databse.execute('''
+    CREATE TABLE IF NOT EXISTS $tableName (
+    "id" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "mobile" TEXT NOT NULL,
     "gender" TEXT NOT NULL,
-   );""";
-    await databse.execute(sql);
+    PRIMARY KEY("id" AUTOINCREMENT)
+   )
+   ''');
   }
 
   Future<int> create({required userResonseModel usermodel}) async {
